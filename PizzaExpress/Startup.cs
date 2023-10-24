@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PizzaExpress.Models.Context;
+using PizzaExpress.Repositories;
+using PizzaExpress.Repositories.Interfaces;
 
 namespace PizzaExpress;
 
@@ -19,6 +21,10 @@ public class Startup
                 Configuration.GetConnectionString("DefaultConnection")
             )
         );
+
+        services.AddTransient<IProductRepository, ProductRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
+
         services.AddControllersWithViews();
     }
 
