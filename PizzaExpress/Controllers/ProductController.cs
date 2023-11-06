@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PizzaExpress.Repositories.Interfaces;
+using PizzaExpress.ViewModels;
 
 namespace PizzaExpress.Controllers
 {
@@ -14,8 +15,14 @@ namespace PizzaExpress.Controllers
 
         public IActionResult List()
         {
-            var product = _productRepository.Products;
-            return View(product);
+            ViewData["Title"] = "Lista de Lanches";
+            ViewData["Date"] = DateTime.Now;
+
+            var productListViewModel = new ProductListViewModel();
+            productListViewModel.Products = _productRepository.Products;
+            productListViewModel.CurrentCategory = "Categoria Atual";
+
+            return View(productListViewModel);
         }
     }
 }
